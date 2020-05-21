@@ -1,13 +1,22 @@
 const express = require("express");
+const bodyParser = require('body-parser')
 const app = express();
 
-app.get("/analytics", (req, res) => {
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.use(express.static('public'))
+
+app.post("/analytics", (req, res) => {
   console.log("recieved on /analytics");
+  console.log(req.body)
   res.sendStatus(204);
 })
 
 app.post("/", (req, res) => {
-  console.log(`url ${req.query.url} time ${req.query.time} body ${req.body}`);
   res.sendStatus(204);
 })
 
