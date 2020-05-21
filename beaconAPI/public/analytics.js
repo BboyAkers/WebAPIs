@@ -1,7 +1,7 @@
 
 let dataHistory = [
   {
-    action: 'input element',
+    action: '',
     date: Date()
   }
 ]
@@ -9,10 +9,10 @@ let dataHistory = [
 document.addEventListener('click', (event) => {
   dataHistory.push(
     {
-      action: event.srcElement,
+      action: event.target.outerHTML,
       date: Date()
     });
-  console.log(event.srcElement)
+  console.log(event.target.outerHTML)
 })
 
 window.onload = window.onunload = function analytics(event) {
