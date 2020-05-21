@@ -118,7 +118,39 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"analytics.js":[function(require,module,exports) {
+window.onload = window.onunload = function analytics(event) {
+  if (!navigator.sendBeacon) return;
+  var url = "http://localhost:8081/analytics"; // Create the data to send
 
+  var data = {
+    date: Date()
+  };
+  fetch(url, {
+    method: 'POST',
+    // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log('Success:', data);
+  }).catch(function (error) {
+    console.error('Error:', error);
+  }); // let submitData = new Blob([JSON.stringify(data, null, 2)], {type : 'application/json'});
+  // Send the beacon
+  // let status = navigator.sendBeacon(url, submitData);
+  // const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
+  // Log the data and result
+  // console.log("sendBeacon: URL = ", url, "; data = ", data, "; status = ", status);
+}; // window.onsubmit = function send_analytics() {
+//   var data = JSON.stringify({
+//     time: Date()
+//   });
+//   navigator.sendBeacon("http://localhost:8081/?url=home&time=9000")
+//   // navigator.sendBeacon('http://localhost:8081/', data);
+// };
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -147,7 +179,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57832" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53096" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
