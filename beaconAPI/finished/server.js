@@ -11,7 +11,6 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 
 app.post("/analytics", (req, res) => {
-  console.log("recieved on /analytics");
   console.log(req.body)
   res.sendStatus(204);
 })
