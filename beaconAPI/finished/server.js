@@ -1,19 +1,19 @@
 const express = require("express");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static('public'))
 
 app.post("/analytics", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   res.sendStatus(204);
 })
 
 // http://localhost:8081/index.html
-app.listen(8081, () => console.log("Listening on 8081"))
+app.listen(8081, () => console.log("Listening on 8081"));
